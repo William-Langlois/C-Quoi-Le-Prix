@@ -1,4 +1,3 @@
-from C"'"Quoi-Le-Prix import app
-
+import CQuoi-Le-Prix
 if __name__ == "__main__":
     app.run()

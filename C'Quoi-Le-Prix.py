@@ -14,7 +14,7 @@ def index():
 def LaunchGame():
 
     KeywordsByCat = {
-                'Computers':['souris','ordinateur','clavier'],
+                'Computers':['souris','ordinateur','clavier','tapis de souris','ecran',''],
                 'Vehicles' :['Jantes','Pare-Brise','Essuie-glaces'],
                 'Kitchen'  :['Casseroles','eponges']
             }
