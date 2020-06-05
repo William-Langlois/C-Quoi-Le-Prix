@@ -2,7 +2,8 @@
 import requests
 import json
 import random
-from flask import Flask , render_template , request
+import time
+from flask import Flask , render_template , request , session
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def index():
 def LaunchGame():
 
     KeywordsByCat = {
-                'Computers':['souris','ordinateur','clavier','tapis de souris','ecran',''],
+                'Computers':['souris','ordinateur','clavier','tapis de souris','ecran'],
                 'Vehicles' :['Jantes','Pare-Brise','Essuie-glaces'],
                 'Kitchen'  :['Casseroles','eponges']
             }
@@ -58,10 +59,22 @@ def LaunchGame():
     except:
         absecart=0
 
-    return render_template('game.html',aName = articleName,aImg = articleImg,aId = articleId,nbParties=nbParties,absecart=absecart)
+    newTime = time.time()
+
+    try:
+        score=request.form['score']
+    except:
+        score="\n"
+
+
+    return render_template('game.html',score=score,aName = articleName,aImg = articleImg,aId = articleId,nbParties=nbParties,absecart=absecart,timeDebut=newTime)
 
 @app.route('/try',methods = ['get','post'])
 def verifPrice():
+
+    timeFin = time.time()-float(request.form['timeDebut'])
+    timeFin = (round(timeFin*100))/100
+
     url="https://api.cdiscount.com/OpenApi/json/GetProduct"
 
     parameters={
@@ -89,13 +102,14 @@ def verifPrice():
     except NameError:
         ecart=0
 
-    ecart = ecart + 100-((correctPrice*100)/PriceEntry)/(float(request.form['nbParties'])+1)
+    ecart = ecart + 100-((correctPrice*100)/PriceEntry)/(int(request.form['nbParties'])+1)
     ecart =(round(ecart*100))/100
     absecart=abs(ecart)
 
     ecartdirect = 100-((correctPrice*100)/PriceEntry)
     ecartdirect =(round(ecartdirect*100))/100
     ecartdirect = abs(ecartdirect)
+
 
     return render_template('try.html',
     aName = articleName,
@@ -104,7 +118,8 @@ def verifPrice():
     priceEntry = PriceEntry,
     ecartdirect=ecartdirect,
     absecart=absecart,
-    nbParties=int(request.form['nbParties'])+1
+    nbParties=int(request.form['nbParties'])+1,
+    timeFin=timeFin,
     )
 
 

@@ -17,9 +17,12 @@
         <form method="POST" action="/try">
             <input name="priceEntry" type="text" placeholder="Entrez un prix">
             <input type="hidden" name="nbParties" value={{nbParties}}>
-            <input type="submit" value="Valider">
+            <input name="timeDebut" type="hidden" value={{timeDebut}}>
             <input name='id' type="hidden" value={{aId}}>
+            <input type="hidden"  name="score" value={{score}}>
+            <input type="submit" value="Valider">
 
-        </form>
+
+        </form> 
     </body>
 </html>

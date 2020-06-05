@@ -14,6 +14,7 @@
         <h3>Prix correct : {{correctPrice}}</h3>
         <h2>Votre Prix : {{priceEntry}}</h2>
         <h3>Soit un ecart de : {{ecartdirect}}%</h3>
+        <h4>en :{{timeFin}} secondes</h4>
         <h5>nombre de parties : {{nbParties}}</h5>
 
         <form action="/game" method="POST">
@@ -22,8 +23,10 @@
                 <option value="Kitchen">Cuisine</option>
                 <option value="Vehicles">Vehicules</option>
             </select>
-            <input name="absecart" type="hidden" value={{absecart}}>
+            <input  type="hidden" name="absecart" value={{absecart}}>
             <input type="hidden" name="nbParties" value={{nbParties}}>
+            <input type="hidden" name="score" value={{score}}>
+
            
             <input type="submit" value="Nouvel Article">
         </form>
