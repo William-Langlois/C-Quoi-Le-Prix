@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <head>
+        <title>C'Quoi-Le-Prix - Game</title>
+        <meta charset="UTF-8">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+              crossorigin="anonymous">
+    </head>
+    <body>
+        <h2>{{ aName }}</h2>
+        <img src={{aImg}}>
+        <h3>Prix correct : {{correctPrice}}</h3>
+        <h2>Votre Prix : {{priceEntry}}</h2>
+        <h3>Soit un ecart de : {{ecartdirect}}%</h3>
+        <h5>nombre de parties : {{nbParties}}</h5>
+
+        <form action="/game" method="POST">
+            <select name="cat">
+                <option value="Computers">Informatique</option>
+                <option value="Kitchen">Cuisine</option>
+                <option value="Vehicles">Vehicules</option>
+            </select>
+            <input name="absecart" type="hidden" value={{absecart}}>
+            <input type="hidden" name="nbParties" value={{nbParties}}>
+           
+            <input type="submit" value="Nouvel Article">
+        </form>
+    </body>
+</html>
